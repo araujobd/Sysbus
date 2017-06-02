@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "409614603433",
+    "firebase_url": "https://sysbus-c877b.firebaseio.com",
+    "project_id": "sysbus-c877b",
+    "storage_bucket": "sysbus-c877b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409614603433:android:7ca2e56f20e2ae9a",
+        "android_client_info": {
+          "package_name": "com.dantas.bruno.sysbus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409614603433-33mm9qnoik6du88ag75ap1315h1uvsef.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dantas.bruno.sysbus",
+            "certificate_hash": "767eb0a593871d1c2b942c0fc3c766a2f208c90e"
+          }
+        },
+        {
+          "client_id": "409614603433-79qfjrktsgqqt5sbqt66d4rfa8n6ej21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmz5QwEpg_tM-a8ri9ZcwKzsBmBax_APg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409614603433-79qfjrktsgqqt5sbqt66d4rfa8n6ej21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
