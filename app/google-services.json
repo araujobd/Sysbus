@@ -29,7 +29,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCmz5QwEpg_tM-a8ri9ZcwKzsBmBax_APg"
+          "current_key": "AIzaSyCu5scYrdoH6vg-vloXHqeRhD0InlsL9XI"
         }
       ],
       "services": {
@@ -44,6 +44,37 @@
               "client_type": 3
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409614603433:android:9c70230d2439716f",
+        "android_client_info": {
+          "package_name": "com.example.cainan.sysbus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409614603433-79qfjrktsgqqt5sbqt66d4rfa8n6ej21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu5scYrdoH6vg-vloXHqeRhD0InlsL9XI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

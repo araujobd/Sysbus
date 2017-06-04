@@ -6,23 +6,23 @@ package com.dantas.bruno.sysbus.domain;
 
 public class User {
 
-  private String username;
+  private String nome;
   private String email;
 
   public User() {
   }
 
-  public User(String username, String email) {
-    this.username = username;
+  public User(String nome, String email) {
+    this.nome = nome;
     this.email = email;
   }
 
-  public String getUsername() {
-    return username;
+  public String getNome() {
+    return nome;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setNome(String nome) {
+    this.nome = nome;
   }
 
   public String getEmail() {
