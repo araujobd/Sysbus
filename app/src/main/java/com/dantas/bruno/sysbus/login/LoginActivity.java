@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.dantas.bruno.sysbus.BaseActivity;
 import com.dantas.bruno.sysbus.cadastro.CadastroActivity;
@@ -20,6 +19,7 @@ public class LoginActivity extends BaseActivity implements LoginContrato.View {
   private LoginContrato.Presenter presenter;
 
   private ConstraintLayout layout;
+  private TextView tvMsgError;
   private EditText ed_email, ed_senha;
   private Button bt_login, bt_cadastrar;
 
@@ -34,6 +34,8 @@ public class LoginActivity extends BaseActivity implements LoginContrato.View {
 
   private void configurarTela() {
     layout = (ConstraintLayout) findViewById(R.id.layout);
+
+    tvMsgError = (TextView) findViewById(R.id.tv_msg_erro);
 
     ed_email = (EditText) findViewById(R.id.ed_email);
     ed_senha = (EditText) findViewById(R.id.ed_senha);
@@ -95,6 +97,7 @@ public class LoginActivity extends BaseActivity implements LoginContrato.View {
   @Override
   public void mostrarErroLogin() {
     esconderProgresso();
+    tvMsgError.setVisibility(View.VISIBLE);
     mostrarMensagem(getString(R.string.msg_erro_login));
   }
 

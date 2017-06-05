@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.dantas.bruno.sysbus.BaseActivity;
 import com.dantas.bruno.sysbus.MainsActiity;
@@ -18,6 +19,7 @@ public class CadastroActivity extends BaseActivity implements CadastroContrato.V
   private CadastroContrato.Presenter presenter;
 
   private ConstraintLayout layout;
+  private TextView tvMsgErro;
   private EditText edNome, edEmail, edSenha;
   private Button btCadastro;
 
@@ -33,6 +35,8 @@ public class CadastroActivity extends BaseActivity implements CadastroContrato.V
 
   private void configurarTela() {
     layout = (ConstraintLayout) findViewById(R.id.layout);
+
+    tvMsgErro = (TextView) findViewById(R.id.tv_msg_erro);
 
     edNome = (EditText) findViewById(R.id.user_nome);
     edEmail = (EditText) findViewById(R.id.user_email);
@@ -88,6 +92,7 @@ public class CadastroActivity extends BaseActivity implements CadastroContrato.V
   @Override
   public void mostrarErroCadastro() {
     esconderProgresso();
+    tvMsgErro.setVisibility(View.VISIBLE);
     mostrarMensagem(getString(R.string.msg_erro_cadastro));
   }
 

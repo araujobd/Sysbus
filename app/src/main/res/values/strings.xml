@@ -12,10 +12,10 @@
 
   <string name="action_settings">Settings</string>
   <string name="title_activity_maps">Map</string>
-  <string name="msg_erro_login">Login Inválido!</string>
+  <string name="msg_erro_login">Email ou Senha incorretos!</string>
   <string name="user_nome">Nome</string>
   <string name="user_email">Email</string>
   <string name="user_senha">Senha</string>
   <string name="cadastrar">Cadastrar</string>
-  <string name="msg_erro_cadastro">Erro no Cadastro</string>
+  <string name="msg_erro_cadastro">Cadastro Inválido</string>
 </resources>
