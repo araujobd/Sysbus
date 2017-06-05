@@ -3,6 +3,7 @@ package com.dantas.bruno.sysbus.splash;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
+import android.view.View;
 
 import com.dantas.bruno.sysbus.BaseActivity;
 import com.dantas.bruno.sysbus.login.LoginActivity;
@@ -18,6 +19,9 @@ public class SplashActivity extends BaseActivity implements SplashContrato.View{
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splash);
+
+
+    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
     presenter = new SplashPresenter(this);
 
