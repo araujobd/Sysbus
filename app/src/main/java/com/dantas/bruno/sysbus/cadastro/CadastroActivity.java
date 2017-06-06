@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.dantas.bruno.sysbus.BaseActivity;
 import com.dantas.bruno.sysbus.MainsActiity;
 import com.dantas.bruno.sysbus.R;
+import com.dantas.bruno.sysbus.login.LoginActivity;
 
 public class CadastroActivity extends BaseActivity implements CadastroContrato.View {
 
@@ -33,6 +34,12 @@ public class CadastroActivity extends BaseActivity implements CadastroContrato.V
     configurarBotao();
   }
 
+  @Override
+  public void onBackPressed() {
+    startActivity(new Intent(CadastroActivity.this, LoginActivity.class));
+    finish();
+  }
+
   private void configurarTela() {
     layout = (ConstraintLayout) findViewById(R.id.layout);
 
@@ -45,6 +52,8 @@ public class CadastroActivity extends BaseActivity implements CadastroContrato.V
     btCadastro = (Button) findViewById(R.id.bt_cadastro);
 
     setLayout(layout);
+    setProgressBar(R.id.progress);
+
     presenter = new CadastroPresenter(this);
   }
 
@@ -93,7 +102,7 @@ public class CadastroActivity extends BaseActivity implements CadastroContrato.V
   public void mostrarErroCadastro() {
     esconderProgresso();
     tvMsgErro.setVisibility(View.VISIBLE);
-    mostrarMensagem(getString(R.string.msg_erro_cadastro));
+//    mostrarMensagem(getString(R.string.msg_erro_cadastro));
   }
 
   @Override

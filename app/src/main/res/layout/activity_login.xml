@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout"
+    android:padding="@dimen/padding"
     android:background="@color/colorPrimaryDark"
     tools:context="com.dantas.bruno.sysbus.login.LoginActivity">
 
@@ -26,10 +27,9 @@
   <android.support.design.widget.TextInputLayout
       android:id="@+id/til_email"
       app:hintTextAppearance="@style/Widget.Design.TextInputLayout"
-      android:textColorHint="@android:color/white"
-      android:foregroundTint="@android:color/white"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:textColorHint="@android:color/white"
       android:layout_marginTop="64dp"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintLeft_toLeftOf="parent"
@@ -39,6 +39,7 @@
 
     <EditText
         android:id="@+id/ed_email"
+        android:backgroundTint="@android:color/white"
         android:hint="@string/ed_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,6 +51,7 @@
       android:id="@+id/til_senha"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:textColorHint="@android:color/white"
       android:layout_marginTop="28dp"
       app:layout_constraintHorizontal_bias="0.502"
       app:layout_constraintLeft_toLeftOf="parent"
@@ -60,6 +62,7 @@
         android:id="@+id/ed_senha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
         android:hint="@string/ed_senha"
         android:inputType="textPassword"
         />
@@ -67,7 +70,7 @@
 
   <Button
       android:id="@+id/bt_login"
-      android:layout_width="150dp"
+      android:layout_width="170dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="29dp"
       android:text="@string/login"
@@ -85,6 +88,8 @@
       android:layout_marginBottom="8dp"
       android:layout_marginTop="8dp"
       android:text="@string/Cadastrar"
+      android:textColor="@color/colorAccent"
+      android:textStyle="bold"
       android:background="@null"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"

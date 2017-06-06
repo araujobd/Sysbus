@@ -1,8 +1,10 @@
 package com.dantas.bruno.sysbus;
 
+import android.graphics.CornerPathEffect;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.dantas.bruno.sysbus.domain.Coordenada;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -10,6 +12,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -39,20 +44,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
   public void onMapReady(GoogleMap googleMap) {
     mMap = googleMap;
 
+    List<Coordenada> coordenadas = Coordenada.getPontos();
+
+    for (Coordenada x : coordenadas) {
+      LatLng ponto = new LatLng(x.getLatitude(), x.getLongitude());
+      mMap.addMarker(new MarkerOptions()
+          .position(ponto)
+          .flat(true)
+          .title(x.getTitulo())
+          .zIndex(-1.0f)
+          .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_bus))
+      );
+
+    }
+
+    mMap.moveCamera(
+        CameraUpdateFactory.newLatLng(
+            new LatLng(
+                coordenadas.get(0).getLatitude(),
+                coordenadas.get(0).getLongitude())
+        )
+    );
+
     // Add a marker in Sydney and move the camera
-    LatLng caico = new LatLng(-6.462429,-37.0950466);
+//    LatLng caico = new LatLng(-6.462429,-37.0950466);
 //    mMap.addMarker(new MarkerOptions()
 //        .position(caico)
 //        .flat(false)
 //        .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_bus))
 //    );
-    GroundOverlayOptions newarkMap = new GroundOverlayOptions()
-        .image(BitmapDescriptorFactory.fromResource(R.drawable.icon_bus))
-        .anchor(0,1)
-        .bearing(30)
-        .position(caico, 10f);
-    mMap.addGroundOverlay(newarkMap);
-    mMap.moveCamera(CameraUpdateFactory.newLatLng(caico));
+//    GroundOverlayOptions newarkMap = new GroundOverlayOptions()
+//        .image(BitmapDescriptorFactory.fromResource(R.drawable.icon_bus))
+//        .anchor(0,1)
+//        .bearing(30)
+//        .position(caico, 10f);
+//    mMap.addGroundOverlay(newarkMap);
+//    mMap.moveCamera(CameraUpdateFactory.newLatLng(caico));
 
   }
 }
