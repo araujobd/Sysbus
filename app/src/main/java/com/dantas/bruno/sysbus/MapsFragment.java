@@ -3,6 +3,7 @@ package com.dantas.bruno.sysbus;
 import android.graphics.CornerPathEffect;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 
 import com.dantas.bruno.sysbus.domain.Coordenada;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -10,24 +11,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
 
   private GoogleMap mMap;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_maps);
-    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-        .findFragmentById(R.id.map);
-    mapFragment.getMapAsync(this);
+      ///// SLide 66
+    getMapAsync(this);
   }
 
 
@@ -57,14 +54,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
       );
 
     }
-
-    mMap.moveCamera(
-        CameraUpdateFactory.newLatLng(
-            new LatLng(
-                coordenadas.get(0).getLatitude(),
-                coordenadas.get(0).getLongitude())
-        )
-    );
+    LatLng ponto = new LatLng(coordenadas.get(0).getLatitude(), coordenadas.get(0).getLongitude());
+    float zoom = 16;
+    mMap.moveCamera( CameraUpdateFactory.newLatLngZoom( ponto, zoom ));
 
     // Add a marker in Sydney and move the camera
 //    LatLng caico = new LatLng(-6.462429,-37.0950466);

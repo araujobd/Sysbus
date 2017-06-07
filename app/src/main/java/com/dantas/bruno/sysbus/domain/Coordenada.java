@@ -57,6 +57,7 @@ public class Coordenada implements Serializable {
     coordenadas.add(new Coordenada("P3", -6.4696353, -37.0962158));
     coordenadas.add(new Coordenada("P4", -6.4624969, -37.0945871));
     coordenadas.add(new Coordenada("P5", -6.4627405, -37.0938243));
+    coordenadas.add(new Coordenada("UFRN", -6.467900, -37.084776));
 
     return coordenadas;
   }

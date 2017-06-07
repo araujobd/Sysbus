@@ -29,8 +29,9 @@
         android:name=".login.LoginActivity"
         android:theme="@style/AppTheme.NoActionBar">
     </activity>
-    <activity android:name=".cadastro.CadastroActivity"
-              android:theme="@style/AppTheme.NoActionBar">
+    <activity
+        android:name=".cadastro.CadastroActivity"
+        android:theme="@style/AppTheme.NoActionBar">
     </activity>
     <activity
         android:name=".MainsActiity"
@@ -49,9 +50,9 @@
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/google_maps_key"/>
 
-    <activity
-        android:name=".MapsActivity"
-        android:label="@string/title_activity_maps">
+   <activity
+        android:name=".MapsExemploActivity"
+        android:label="@string/title_activity_maps_exemplo">
     </activity>
   </application>
 
