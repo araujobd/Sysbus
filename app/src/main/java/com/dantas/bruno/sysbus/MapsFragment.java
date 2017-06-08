@@ -1,11 +1,8 @@
 package com.dantas.bruno.sysbus;
 
-import android.graphics.CornerPathEffect;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 
-import com.dantas.bruno.sysbus.domain.Coordenada;
+import com.dantas.bruno.sysbus.model.Coordenada;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

@@ -3,7 +3,7 @@ package com.dantas.bruno.sysbus.cadastro;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.dantas.bruno.sysbus.domain.User;
+import com.dantas.bruno.sysbus.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

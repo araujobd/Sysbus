@@ -13,7 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.dantas.bruno.sysbus.data.RepositorioImpl;
+import com.dantas.bruno.sysbus.model.Ponto;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
 
 public class MainsActiity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -78,6 +82,7 @@ public class MainsActiity extends AppCompatActivity
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
+      RepositorioImpl.getInstance().setPontos();
       return true;
     }
 

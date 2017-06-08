@@ -1,4 +1,4 @@
-package com.dantas.bruno.sysbus.domain;
+package com.dantas.bruno.sysbus.model;
 
 /**
  * Created by bruno on 02/06/17.

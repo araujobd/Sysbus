@@ -1,4 +1,4 @@
-package com.dantas.bruno.sysbus.domain;
+package com.dantas.bruno.sysbus.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
