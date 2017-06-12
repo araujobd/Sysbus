@@ -1,6 +1,8 @@
 package com.dantas.bruno.sysbus;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.dantas.bruno.sysbus.model.Coordenada;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -13,7 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
+public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
   private GoogleMap mMap;
 
@@ -37,6 +39,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
   @Override
   public void onMapReady(GoogleMap googleMap) {
     mMap = googleMap;
+
+   // mMap.getUiSettings().setZoomControlsEnabled(true);
 
     List<Coordenada> coordenadas = Coordenada.getPontos();
 
@@ -70,5 +74,11 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 //    mMap.addGroundOverlay(newarkMap);
 //    mMap.moveCamera(CameraUpdateFactory.newLatLng(caico));
 
+  }
+
+  @Override
+  public void onMapClick(LatLng latLng) {
+    Log.d("123", "ASJDJASD + " + latLng.toString());
+    Toast.makeText(getActivity(), "Coordenadas: "+ latLng.toString(), Toast.LENGTH_SHORT).show();
   }
 }

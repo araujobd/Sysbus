@@ -1,7 +1,9 @@
 package com.dantas.bruno.sysbus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -14,10 +16,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.dantas.bruno.sysbus.data.RepositorioImpl;
-import com.dantas.bruno.sysbus.model.Ponto;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.List;
 
 public class MainsActiity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,14 +49,6 @@ public class MainsActiity extends AppCompatActivity
   }
 
   @Override
-  protected void onResume() {
-    super.onResume();
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    if (auth.getCurrentUser() != null)
-      Toast.makeText(this, auth.getCurrentUser().getDisplayName(), Toast.LENGTH_LONG).show();
-  }
-
-  @Override
   public void onBackPressed() {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -75,32 +67,42 @@ public class MainsActiity extends AppCompatActivity
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      RepositorioImpl.getInstance().setPontos();
-      return true;
+    switch(item.getItemId()) {
+      case R.id.action_settings:
+        RepositorioImpl.getInstance().setPontos();
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
     }
-
-    return super.onOptionsItemSelected(item);
   }
 
   @SuppressWarnings("StatementWithEmptyBody")
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
-    // Handle navigation view item clicks here.
-    int id = item.getItemId();
-
-    if (id == R.id.mapa_exemplo) {
-      // Handle the camera action
+    FragmentTransaction transaction;
+    switch (item.getItemId()) {
+      case R.id.mapa_exemplo:
+        showFragment(new MapsFragment(), "Mapa EXEMPLO");
+        break;
+      case R.id.mapa_provider:
+        showFragment(new ProviderFragment(), "PROVIDER");
+        break;
+      case R.id.gps_provider:
+        showFragment(new GPSFragment(), "GPS");
+        break;
+      case R.id.sliding_view:
+        startActivity(new Intent(MainsActiity.this, MapsExemploActivity.class));
+        break;
     }
-
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  private void showFragment(Fragment fragment, String tag) {
+    FragmentTransaction transaction = manager.beginTransaction();
+    transaction.replace(R.id.container, fragment, tag);
+    transaction.commitAllowingStateLoss();
+
   }
 }

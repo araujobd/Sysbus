@@ -6,6 +6,18 @@
         android:id="@+id/mapa_exemplo"
         android:icon="@drawable/ic_menu_camera"
         android:title="Mapa Exemplo"/>
+    <item
+        android:id="@+id/mapa_provider"
+        android:icon="@drawable/ic_location_on_black_24dp"
+        android:title="Mapa Provider"/>
+    <item
+        android:id="@+id/gps_provider"
+        android:icon="@drawable/ic_location_on_black_24dp"
+        android:title="GPS Provider"/>
+    <item
+        android:id="@+id/sliding_view"
+        android:icon="@drawable/ic_menu_send"
+        android:title="Sliding"/>
   </group>
 
 </menu>
