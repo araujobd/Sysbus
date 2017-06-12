@@ -1,6 +1,7 @@
 package com.dantas.bruno.sysbus.data;
 
 import com.dantas.bruno.sysbus.Listener;
+import com.dantas.bruno.sysbus.model.Ponto;
 
 
 /**
@@ -10,7 +11,7 @@ import com.dantas.bruno.sysbus.Listener;
 public interface Repositorio {
 
 
-  void getPontos();
-  void setPontos();
+  void getPontos(Listener listener);
+  void setPonto(Ponto ponto);
 
 }

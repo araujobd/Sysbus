@@ -1,27 +1,36 @@
 package com.dantas.bruno.sysbus;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.dantas.bruno.sysbus.data.Repositorio;
+import com.dantas.bruno.sysbus.data.RepositorioImpl;
 import com.dantas.bruno.sysbus.model.Coordenada;
+import com.dantas.bruno.sysbus.model.Ponto;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
+public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
   private GoogleMap mMap;
+  private Repositorio repositorio;
+  private Viewss viewss;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-      ///// SLide 66
+    repositorio = RepositorioImpl.getInstance();
     getMapAsync(this);
+    viewss = (Viewss) getActivity();
   }
 
 
@@ -40,17 +49,34 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     List<Coordenada> coordenadas = Coordenada.getPontos();
 
-    for (Coordenada x : coordenadas) {
-      LatLng ponto = new LatLng(x.getLatitude(), x.getLongitude());
-      mMap.addMarker(new MarkerOptions()
-          .position(ponto)
-          .flat(true)
-          .title(x.getTitulo())
-          .zIndex(-1.0f)
-          .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_bus))
-      );
+    repositorio.getPontos(new Listener() {
+      @Override
+      public void onready(List<Ponto> pontos) {
+        for (Ponto p : pontos) {
+          LatLng ponto = new LatLng(p.getLatitude(), p.getLongitude());
+          mMap.addMarker(new MarkerOptions()
+                  .position(ponto)
+                  .title(p.getDescricao())
+                  .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_bus))
+          ).setTag(p);
 
-    }
+
+        }
+      }
+    });
+
+
+//    for (Coordenada x : coordenadas) {
+//      LatLng ponto = new LatLng(x.getLatitude(), x.getLongitude());
+//      mMap.addMarker(new MarkerOptions()
+//          .position(ponto)
+//          .flat(true)
+//          .title(x.getTitulo())
+//          .zIndex(-1.0f)
+//          .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_bus))
+//      );
+//
+//    }
     LatLng ponto = new LatLng(coordenadas.get(0).getLatitude(), coordenadas.get(0).getLongitude());
     float zoom = 16;
     mMap.moveCamera( CameraUpdateFactory.newLatLngZoom( ponto, zoom ));
@@ -70,5 +96,17 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 //    mMap.addGroundOverlay(newarkMap);
 //    mMap.moveCamera(CameraUpdateFactory.newLatLng(caico));
 
+    mMap.setOnMarkerClickListener(this);
+  }
+
+  @Override
+  public boolean onMarkerClick(Marker marker) {
+    Log.d("MARKER", "SSS");
+    Ponto ponto = (Ponto) marker.getTag();
+    if (ponto != null) {
+      viewss.showView(ponto);
+      Log.d("MARKER", "des " + ponto.getDescricao() + " | lat " + ponto.getLatitude() + " | long " + ponto.getLongitude());
+    }
+    return false;
   }
 }

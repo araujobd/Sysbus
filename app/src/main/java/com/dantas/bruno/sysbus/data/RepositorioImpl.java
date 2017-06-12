@@ -36,46 +36,32 @@ public class RepositorioImpl implements Repositorio {
     return INSTANCE;
   }
 
-  public void setPontos() {
-    Ponto ponto = new Ponto("PWQ", -37.377, -37.2342);
+  @Override
+  public void setPonto(Ponto ponto) {
     String uid = reference.child("pontos").push().getKey();
+    ponto.setUid(uid);
     reference.child("pontos").child(uid).setValue(ponto);
   }
 
   @Override
-  public void getPontos() {
+  public void getPontos(final Listener listener) {
     final List<Ponto> pontos = new ArrayList<>();
-    reference.child("pontos").addChildEventListener(new ChildEventListener() {
+    reference.child("paradas").addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
-      public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-        Log.d("AAA", s + "?????????????" + dataSnapshot.getValue().toString());
-      }
-
-      @Override
-      public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-        Log.d("AAA", s + "?????????????" + dataSnapshot.getValue().toString());
-      }
-
-      @Override
-      public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-        Log.d("AAA", "?????????????" + dataSnapshot.getValue().toString());
-      }
-
-      @Override
-      public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-        Log.d("AAA", s + "?????????????" + dataSnapshot.getValue().toString());
-
+      public void onDataChange(DataSnapshot dataSnapshot) {
+        Log.d("PONTOS", dataSnapshot.getChildrenCount() + "|||sads");
+        for (DataSnapshot pontoSnapshot: dataSnapshot.getChildren()) {
+          Ponto ponto = pontoSnapshot.getValue(Ponto.class);
+          Log.d("PONTOS", ponto.getDescricao() + ponto.getLatitude() + "  " + ponto.getLongitude());
+          pontos.add(ponto);
+          listener.onready(pontos);
+        }
       }
 
       @Override
       public void onCancelled(DatabaseError databaseError) {
 
-        Log.d("AAA", "!!!!!!!!!" + databaseError.getDetails());
       }
     });
-
   }
 }
