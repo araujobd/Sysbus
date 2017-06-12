@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Ponto implements Serializable {
 
+  private String uid;
   private String descricao;
   private double latitude;
   private double longitude;
@@ -17,10 +18,19 @@ public class Ponto implements Serializable {
 
   }
 
-  public Ponto(String descricao, double latitude, double longitude) {
+  public Ponto(String uid, String descricao, double latitude, double longitude) {
+    this.uid = uid;
     this.descricao = descricao;
     this.latitude = latitude;
     this.longitude = longitude;
+  }
+
+  public String getUid() {
+    return uid;
+  }
+
+  public void setUid(String uid) {
+    this.uid = uid;
   }
 
   public String getDescricao() {
