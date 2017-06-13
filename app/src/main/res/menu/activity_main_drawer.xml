@@ -8,11 +8,11 @@
         android:title="Mapa Exemplo"/>
     <item
         android:id="@+id/mapa_provider"
-        android:icon="@drawable/ic_location_on_black_24dp"
+        android:icon="@drawable/ic_menu_send"
         android:title="Mapa Provider"/>
     <item
         android:id="@+id/gps_provider"
-        android:icon="@drawable/ic_location_on_black_24dp"
+        android:icon="@drawable/ic_menu_send"
         android:title="GPS Provider"/>
     <item
         android:id="@+id/sliding_view"
