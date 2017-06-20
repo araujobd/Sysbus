@@ -12,14 +12,12 @@ public class Coordenada implements Serializable {
 
   private double latitude;
   private double longitude;
-  private String titulo;
 
   public Coordenada() {
 
   }
 
-  public Coordenada(String titulo, double latitude, double longitude) {
-    this.titulo = titulo;
+  public Coordenada(double latitude, double longitude) {
     this.latitude = latitude;
     this.longitude = longitude;
   }
@@ -40,24 +38,15 @@ public class Coordenada implements Serializable {
     this.longitude = longitude;
   }
 
-  public String getTitulo() {
-    return titulo;
-  }
-
-  public void setTitulo(String titulo) {
-    this.titulo = titulo;
-  }
-
-
   public static List<Coordenada> getPontos() {
     List<Coordenada> coordenadas = new ArrayList<>();
 
-    coordenadas.add(new Coordenada("P1", -6.4593231, -37.0978831));
-    coordenadas.add(new Coordenada("P2", -6.4613393, -37.0962158));
-    coordenadas.add(new Coordenada("P3", -6.4696353, -37.0962158));
-    coordenadas.add(new Coordenada("P4", -6.4624969, -37.0945871));
-    coordenadas.add(new Coordenada("P5", -6.4627405, -37.0938243));
-    coordenadas.add(new Coordenada("UFRN", -6.467900, -37.084776));
+    coordenadas.add(new Coordenada(-6.4593231, -37.0978831));
+    coordenadas.add(new Coordenada(-6.4613393, -37.0962158));
+    coordenadas.add(new Coordenada(-6.4696353, -37.0962158));
+    coordenadas.add(new Coordenada(-6.4624969, -37.0945871));
+    coordenadas.add(new Coordenada(-6.4627405, -37.0938243));
+    coordenadas.add(new Coordenada( -6.467900, -37.084776));
 
     return coordenadas;
   }

@@ -3,7 +3,6 @@ package com.dantas.bruno.sysbus.cadastro;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dantas.bruno.sysbus.BaseActivity;
-import com.dantas.bruno.sysbus.MainsActiity;
+import com.dantas.bruno.sysbus.olds.MainsActiity;
 import com.dantas.bruno.sysbus.R;
 import com.dantas.bruno.sysbus.login.LoginActivity;
 

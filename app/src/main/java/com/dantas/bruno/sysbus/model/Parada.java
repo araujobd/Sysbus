@@ -7,19 +7,21 @@ import java.util.ArrayList;
  * Created by bruno on 02/06/17.
  */
 
-public class Ponto implements Serializable {
+public class Parada implements Serializable {
 
   private String uid;
+  private String nome;
   private String descricao;
   private double latitude;
   private double longitude;
 
-  public Ponto() {
+  public Parada() {
 
   }
 
-  public Ponto(String uid, String descricao, double latitude, double longitude) {
+  public Parada(String uid, String nome, String descricao, double latitude, double longitude) {
     this.uid = uid;
+    this.nome = nome;
     this.descricao = descricao;
     this.latitude = latitude;
     this.longitude = longitude;
@@ -31,6 +33,14 @@ public class Ponto implements Serializable {
 
   public void setUid(String uid) {
     this.uid = uid;
+  }
+
+  public String getNome() {
+    return nome;
+  }
+
+  public void setNome(String nome) {
+    this.nome = nome;
   }
 
   public String getDescricao() {

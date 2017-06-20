@@ -1,6 +1,9 @@
 package com.dantas.bruno.sysbus;
 
-import com.dantas.bruno.sysbus.model.Ponto;
+import android.view.View;
+
+import com.dantas.bruno.sysbus.model.Parada;
+import com.dantas.bruno.sysbus.model.Trajeto;
 
 import java.util.List;
 
@@ -9,5 +12,13 @@ import java.util.List;
  */
 
 public interface Listener {
-  void onready(List<Ponto> pontos);
+
+  interface Paradas {
+    void onReady(List<Parada> paradas);
+  }
+
+  interface Trajetos {
+    void onReady(List<Trajeto> trajetos);
+  }
+
 }

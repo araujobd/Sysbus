@@ -26,7 +26,6 @@
 
   <android.support.design.widget.TextInputLayout
       android:id="@+id/til_email"
-      app:hintTextAppearance="@style/Widget.Design.TextInputLayout"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:textColorHint="@android:color/white"
@@ -41,6 +40,7 @@
         android:id="@+id/ed_email"
         android:backgroundTint="@android:color/white"
         android:hint="@string/ed_email"
+        android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
@@ -64,6 +64,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/white"
         android:hint="@string/ed_senha"
+        android:textColor="@android:color/white"
         android:inputType="textPassword"
         />
   </android.support.design.widget.TextInputLayout>

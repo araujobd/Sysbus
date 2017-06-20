@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.dantas.bruno.sysbus.BaseActivity;
 import com.dantas.bruno.sysbus.cadastro.CadastroActivity;
-import com.dantas.bruno.sysbus.MainsActiity;
 import com.dantas.bruno.sysbus.R;
+import com.dantas.bruno.sysbus.main.PrincipalActivity;
 
 public class LoginActivity extends BaseActivity implements LoginContrato.View {
 
@@ -108,7 +108,7 @@ public class LoginActivity extends BaseActivity implements LoginContrato.View {
 
   @Override
   public void iniciarPrincipal() {
-    startActivity(new Intent(LoginActivity.this, MainsActiity.class));
+    startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
     finish();
   }
 }

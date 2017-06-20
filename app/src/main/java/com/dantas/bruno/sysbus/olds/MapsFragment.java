@@ -1,12 +1,15 @@
-package com.dantas.bruno.sysbus;
+package com.dantas.bruno.sysbus.olds;
 
 import android.os.Bundle;
 import android.util.Log;
 
+import com.dantas.bruno.sysbus.Listener;
+import com.dantas.bruno.sysbus.R;
+import com.dantas.bruno.sysbus.Viewss;
 import com.dantas.bruno.sysbus.data.Repositorio;
 import com.dantas.bruno.sysbus.data.RepositorioImpl;
 import com.dantas.bruno.sysbus.model.Coordenada;
-import com.dantas.bruno.sysbus.model.Ponto;
+import com.dantas.bruno.sysbus.model.Parada;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -16,7 +19,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -49,10 +51,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     List<Coordenada> coordenadas = Coordenada.getPontos();
 
-    repositorio.getPontos(new Listener() {
+    repositorio.buscarParadas(new Listener.Paradas() {
       @Override
-      public void onready(List<Ponto> pontos) {
-        for (Ponto p : pontos) {
+      public void onReady(List<Parada> paradas) {
+        for (Parada p : paradas) {
           LatLng ponto = new LatLng(p.getLatitude(), p.getLongitude());
           mMap.addMarker(new MarkerOptions()
                   .position(ponto)
@@ -102,10 +104,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
   @Override
   public boolean onMarkerClick(Marker marker) {
     Log.d("MARKER", "SSS");
-    Ponto ponto = (Ponto) marker.getTag();
-    if (ponto != null) {
-      viewss.showView(ponto);
-      Log.d("MARKER", "des " + ponto.getDescricao() + " | lat " + ponto.getLatitude() + " | long " + ponto.getLongitude());
+    Parada parada = (Parada) marker.getTag();
+    if (parada != null) {
+      viewss.showView(parada);
+      Log.d("MARKER", "des " + parada.getDescricao() + " | lat " + parada.getLatitude() + " | long " + parada.getLongitude());
     }
     return false;
   }

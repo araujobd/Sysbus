@@ -1,4 +1,4 @@
-package com.dantas.bruno.sysbus;
+package com.dantas.bruno.sysbus.olds;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +20,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dantas.bruno.sysbus.data.Repositorio;
+import com.dantas.bruno.sysbus.R;
+import com.dantas.bruno.sysbus.Viewss;
 import com.dantas.bruno.sysbus.data.RepositorioImpl;
-import com.dantas.bruno.sysbus.model.Coordenada;
-import com.dantas.bruno.sysbus.model.Ponto;
+import com.dantas.bruno.sysbus.model.Parada;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.List;
 
 public class MainsActiity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, Viewss {
@@ -101,7 +99,7 @@ public class MainsActiity extends AppCompatActivity
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
-      RepositorioImpl.getInstance().setPonto(new Ponto());
+      RepositorioImpl.getInstance().setPonto(new Parada());
       return true;
     }
 
@@ -167,8 +165,8 @@ public class MainsActiity extends AppCompatActivity
   }
 
   @Override
-  public void showView(Ponto ponto) {
-    view.setText(ponto.getDescricao());
+  public void showView(Parada parada) {
+    view.setText(parada.getDescricao());
     sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
   }
 }

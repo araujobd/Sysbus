@@ -7,8 +7,8 @@ import android.view.View;
 
 import com.dantas.bruno.sysbus.BaseActivity;
 import com.dantas.bruno.sysbus.login.LoginActivity;
-import com.dantas.bruno.sysbus.MainsActiity;
 import com.dantas.bruno.sysbus.R;
+import com.dantas.bruno.sysbus.main.PrincipalActivity;
 
 public class SplashActivity extends BaseActivity implements SplashContrato.View{
 
@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivity implements SplashContrato.View{
       public void run() {
         verificarLogin();
       }
-    }, 3000);
+    }, 1500);
   }
 
   private void verificarLogin() {
@@ -45,7 +45,7 @@ public class SplashActivity extends BaseActivity implements SplashContrato.View{
 
   @Override
   public void iniciarPrincipal() {
-    startActivity(new Intent(SplashActivity.this, MainsActiity.class));
+    startActivity(new Intent(SplashActivity.this, PrincipalActivity.class));
     finish();
   }
 

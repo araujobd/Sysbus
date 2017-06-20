@@ -1,7 +1,10 @@
 package com.dantas.bruno.sysbus.data;
 
 import com.dantas.bruno.sysbus.Listener;
-import com.dantas.bruno.sysbus.model.Ponto;
+import com.dantas.bruno.sysbus.model.Parada;
+import com.dantas.bruno.sysbus.model.Trajeto;
+
+import java.util.List;
 
 
 /**
@@ -11,7 +14,11 @@ import com.dantas.bruno.sysbus.model.Ponto;
 public interface Repositorio {
 
 
-  void getPontos(Listener listener);
-  void setPonto(Ponto ponto);
+  void buscarParadas(Listener.Paradas listener);
+  void setPonto(Parada parada);
+
+  void buscarTrajetosNoPonto(Parada parada, Listener.Trajetos listener);
+  void buscarOnibus();
+  void buscarRotas();
 
 }
