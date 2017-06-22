@@ -7,12 +7,13 @@ package com.dantas.bruno.sysbus.splash;
 public interface SplashContrato {
 
   interface View {
-    void iniciarLogin();
+    void logar();
     void iniciarPrincipal();
   }
 
   interface Presenter {
     void verificarLogin();
+    void finish();
   }
 
 }

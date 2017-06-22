@@ -1,13 +1,12 @@
 package com.dantas.bruno.sysbus.main.fragmentos.mapa;
 
-import android.util.Log;
 
 import com.dantas.bruno.sysbus.Listener;
-import com.dantas.bruno.sysbus.data.Repositorio;
-import com.dantas.bruno.sysbus.data.RepositorioImpl;
+import com.dantas.bruno.sysbus.repositorio.Repositorio;
+import com.dantas.bruno.sysbus.repositorio.RepositorioImpl;
 import com.dantas.bruno.sysbus.main.Contrato;
 import com.dantas.bruno.sysbus.model.Parada;
-import com.dantas.bruno.sysbus.model.Trajeto;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
@@ -25,6 +24,11 @@ public class MapaPresenter implements Contrato.MapaPresenter{
     repositorio = RepositorioImpl.getInstance();
     this.view = view;
     this.activity = activity;
+    setActivity();
+  }
+
+  public void setActivity() {
+    activity.setFragmento(view);
   }
 
   @Override
@@ -39,14 +43,19 @@ public class MapaPresenter implements Contrato.MapaPresenter{
   }
 
   @Override
-  public void exibirInfoPonto(Parada parada) {
-    activity.iniciarInfoParada(parada);
-    repositorio.buscarTrajetosNoPonto(parada, new Listener.Trajetos() {
+  public void buscarLocalizacaoOnibus() {
+    repositorio.buscarOnibus(new Listener.Localizacao() {
       @Override
-      public void onReady(List<Trajeto> trajetos) {
-        Log.d("AAA", trajetos.size() + "ass");
-        activity.exibirInfoPonto(trajetos);
+      public void onchange(LatLng localizacao) {
+        view.exibirOnibus(localizacao);
       }
     });
   }
+
+  @Override
+  public void exibirInfoPonto(Parada parada) {
+    activity.iniciarInfoParada(parada);
+  }
+
+
 }

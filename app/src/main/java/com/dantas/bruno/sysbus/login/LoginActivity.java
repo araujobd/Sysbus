@@ -98,7 +98,6 @@ public class LoginActivity extends BaseActivity implements LoginContrato.View {
   public void mostrarErroLogin() {
     esconderProgresso();
     tvMsgError.setVisibility(View.VISIBLE);
-    mostrarMensagem(getString(R.string.msg_erro_login));
   }
 
   private void iniciarCadastro() {
@@ -110,5 +109,11 @@ public class LoginActivity extends BaseActivity implements LoginContrato.View {
   public void iniciarPrincipal() {
     startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
     finish();
+  }
+
+  @Override
+  public void finish() {
+    presenter.finish();
+    super.finish();
   }
 }

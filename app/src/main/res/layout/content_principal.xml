@@ -17,11 +17,11 @@
 
   <include
     android:id="@+id/bottom_sheet"
-    layout="@layout/info_ponto"
+    layout="@layout/info_trajeto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="300dp"
     app:behavior_hideable="true"
-    app:behavior_peekHeight="100dp"
+    app:behavior_peekHeight="60dp"
     app:layout_behavior="@string/bottom_sheet_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

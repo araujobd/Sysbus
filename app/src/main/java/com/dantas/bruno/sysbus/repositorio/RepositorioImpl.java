@@ -1,10 +1,14 @@
-package com.dantas.bruno.sysbus.data;
+package com.dantas.bruno.sysbus.repositorio;
 
 import android.util.Log;
 
 import com.dantas.bruno.sysbus.Listener;
+import com.dantas.bruno.sysbus.model.Localizacao;
 import com.dantas.bruno.sysbus.model.Parada;
 import com.dantas.bruno.sysbus.model.Trajeto;
+import com.dantas.bruno.sysbus.model.User;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +24,6 @@ import java.util.List;
  */
 
 public class RepositorioImpl implements Repositorio {
-
 
   private static RepositorioImpl INSTANCE;
   private FirebaseDatabase database;
@@ -40,13 +43,6 @@ public class RepositorioImpl implements Repositorio {
   }
 
   @Override
-  public void setPonto(Parada parada) {
-    String uid = raiz.child("pontos").push().getKey();
-    parada.setUid(uid);
-    raiz.child("pontos").child(uid).setValue(parada);
-  }
-
-  @Override
   public void buscarTrajetosNoPonto(Parada parada, final Listener.Trajetos listener) {
     final List<Trajeto> trajetos = new ArrayList<>();
     raiz.child("paradas").child(parada.getUid()).child("trajetos").addValueEventListener(new ValueEventListener() {
@@ -57,12 +53,9 @@ public class RepositorioImpl implements Repositorio {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
               Trajeto trajeto = dataSnapshot.getValue(Trajeto.class);
-              Log.d("TRAJETO", String.valueOf(dataSnapshot.getRef()));
               trajetos.add(trajeto);
-              Log.d("AAA", "Log" + trajetos.size());
               listener.onReady(trajetos);
             }
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -80,15 +73,18 @@ public class RepositorioImpl implements Repositorio {
   }
 
   @Override
+  public void salvarUsuario(String uid, User user) {
+    raiz.child("users").child(uid).setValue(user);
+  }
+
+  @Override
   public void buscarParadas(final Listener.Paradas listener) {
     final List<Parada> paradas = new ArrayList<>();
     raiz.child("paradas").addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
-        Log.d("PONTOS", dataSnapshot.getChildrenCount() + "|||sads");
         for (DataSnapshot pontoSnapshot : dataSnapshot.getChildren()) {
           Parada parada = pontoSnapshot.getValue(Parada.class);
-          Log.d("PONTOS", "Parada :" + parada.getUid() + parada.getLongitude() + parada.getLatitude() + parada.getDescricao() + parada.getNome());
           paradas.add(parada);
           listener.onReady(paradas);
         }
@@ -102,11 +98,40 @@ public class RepositorioImpl implements Repositorio {
   }
 
   @Override
-  public void buscarOnibus() {
+  public void buscarOnibus(final Listener.Localizacao listener) {
+    ValueEventListener childEventListener = new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot dataSnapshot) {
+        Localizacao localizacao = dataSnapshot.getValue(Localizacao.class);
+        if (localizacao.getOnibusatual().getStatus().contentEquals("true"))
+          listener.onchange(new LatLng(localizacao.getLatitude(), localizacao.getLongitude()));
+      }
 
+      @Override
+      public void onCancelled(DatabaseError databaseError) {
+
+      }
+    };
+    raiz.child("localizacao").addValueEventListener(childEventListener);
   }
 
   @Override
-  public void buscarRotas() {
+  public void buscarTrajetos(final Listener.Trajetos listener) {
+    final List<Trajeto> trajetos = new ArrayList<>();
+    raiz.child("trajetos").addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot dataSnapshot) {
+        for (DataSnapshot data : dataSnapshot.getChildren()) {
+          Trajeto trajeto = data.getValue(Trajeto.class);
+          trajetos.add(trajeto);
+        }
+        listener.onReady(trajetos);
+      }
+
+      @Override
+      public void onCancelled(DatabaseError databaseError) {
+
+      }
+    });
   }
 }

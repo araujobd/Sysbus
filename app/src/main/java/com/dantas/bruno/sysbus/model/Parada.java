@@ -14,6 +14,7 @@ public class Parada implements Serializable {
   private String descricao;
   private double latitude;
   private double longitude;
+  private String tempoPadrao;
 
   public Parada() {
 
@@ -25,6 +26,15 @@ public class Parada implements Serializable {
     this.descricao = descricao;
     this.latitude = latitude;
     this.longitude = longitude;
+  }
+
+  public Parada(String uid, String nome, String descricao, double latitude, double longitude, String tempoPadrao) {
+    this.uid = uid;
+    this.nome = nome;
+    this.descricao = descricao;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.tempoPadrao = tempoPadrao;
   }
 
   public String getUid() {
@@ -65,5 +75,13 @@ public class Parada implements Serializable {
 
   public void setLongitude(double longitude) {
     this.longitude = longitude;
+  }
+
+  public String getTempoPadrao() {
+    return tempoPadrao;
+  }
+
+  public void setTempoPadrao(String tempoPadrao) {
+    this.tempoPadrao = tempoPadrao;
   }
 }

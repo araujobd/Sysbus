@@ -13,6 +13,7 @@ public interface LoginContrato {
 
   interface Presenter {
     void loginComFirebase(String email, String senha);
+    void finish();
   }
 
 }

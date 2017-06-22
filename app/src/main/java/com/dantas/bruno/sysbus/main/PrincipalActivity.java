@@ -1,32 +1,36 @@
 package com.dantas.bruno.sysbus.main;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dantas.bruno.sysbus.BaseActivity;
 import com.dantas.bruno.sysbus.R;
-import com.dantas.bruno.sysbus.infoponto.InfoParadaActivity;
+import com.dantas.bruno.sysbus.adapter.AdapterParadas;
+import com.dantas.bruno.sysbus.infoparada.InfoParadaActivity;
 import com.dantas.bruno.sysbus.login.LoginActivity;
 import com.dantas.bruno.sysbus.main.fragmentos.mapa.MapaFragment;
 import com.dantas.bruno.sysbus.model.Parada;
 import com.dantas.bruno.sysbus.model.Trajeto;
-
-import java.util.List;
+import com.dantas.bruno.sysbus.rotas.RotasActivity;
 
 /**
  * Created by bruno on 12/06/17.
@@ -36,6 +40,7 @@ public class PrincipalActivity extends BaseActivity
     implements Contrato.PrincipalView, NavigationView.OnNavigationItemSelectedListener {
 
   private static final int INFO_PARADA_REQUEST = 1;
+  private static final int INFO_ROTAS_REQUEST = 2;
 
   private Contrato.PrincipalPresenter presenter;
 
@@ -45,7 +50,9 @@ public class PrincipalActivity extends BaseActivity
   private NavigationView navigation;
   private BottomSheetBehavior bottomSheet;
 
-  private TextView tvInfoParada;
+  private AdapterParadas adapter;
+  private TextView tvRota, tvUserNome, tvUserEmail;
+  private ListView list;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +68,16 @@ public class PrincipalActivity extends BaseActivity
   }
 
   @Override
+  protected void onRestart() {
+    super.onRestart();
+  }
+
+  @Override
   protected void onStart() {
+    if (drawer.isDrawerOpen(GravityCompat.START))
+      drawer.closeDrawer(GravityCompat.START);
     super.onStart();
+
     presenter.verificarUsuario();
   }
 
@@ -70,15 +85,17 @@ public class PrincipalActivity extends BaseActivity
   public void onBackPressed() {
     if (drawer.isDrawerOpen(GravityCompat.START))
       drawer.closeDrawer(GravityCompat.START);
+    else if (bottomSheet.getState() == BottomSheetBehavior.STATE_EXPANDED ||
+                bottomSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED)
+      bottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN);
     else
-      super.onBackPressed();
+      sair();
   }
 
   private void configurarTela() {
     toolbar = (Toolbar) findViewById(R.id.toolbar);
     drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     manager = getSupportFragmentManager();
-
 
     View bottomSheetView = findViewById(R.id.bottom_sheet);
     bottomSheet = BottomSheetBehavior.from(bottomSheetView);
@@ -94,6 +111,12 @@ public class PrincipalActivity extends BaseActivity
 
     navigation = (NavigationView) findViewById(R.id.nav_view);
     navigation.setNavigationItemSelectedListener(this);
+    View header = navigation.getHeaderView(0);
+
+    tvUserNome = (TextView) header.findViewById(R.id.tv_user_nome);
+    tvUserEmail = (TextView) header.findViewById(R.id.tv_user_email);
+
+    presenter.buscarUsuario();
   }
 
   private void configurarFragmento() {
@@ -103,7 +126,8 @@ public class PrincipalActivity extends BaseActivity
   }
 
   private void configurarBottomSheet() {
-    tvInfoParada = (TextView) findViewById(R.id.tv_info_parada);
+    tvRota = (TextView) findViewById(R.id.tv_descricao_rota);
+    list = (ListView) findViewById(R.id.list_view_rota);
 
     bottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN);
 
@@ -119,36 +143,44 @@ public class PrincipalActivity extends BaseActivity
     });
   }
 
-  private void configurarViewBottom() {
+  private void configurarViewBottom(Trajeto trajeto) {
+    Log.d("PRINCIPAL", trajeto.toString());
+    tvRota.setText(trajeto.getRota().getNome());
+
+    adapter = new AdapterParadas(this, trajeto);
+    list.setAdapter(adapter);
+
+    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Parada parada = (Parada) adapterView.getItemAtPosition(i);
+        Toast.makeText(PrincipalActivity.this, parada.getNome(), Toast.LENGTH_SHORT).show();
+      }
+    });
+
   }
 
   @Override
   public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     int id = item.getItemId();
     switch (id) {
+      case R.id.sair:
+        sair();
+        return true;
+      case R.id.rotas:
+        iniciarRotas();
+        return true;
       default:
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
   }
 
-  @Override
-  public void trocarFragmento(Fragment fragmento, String TAG) {
-    FragmentTransaction transaction = manager.beginTransaction();
-    transaction.replace(R.id.container, fragmento, TAG);
-    transaction.commitAllowingStateLoss();
-  }
-
-  @Override
-  public void exibirInfoPonto(List<Trajeto> trajetos) {
-//    Log.d("ADAPTER", trajetos.size() + "343434");
-//    if (!listaParadas.isInLayout())
-//      configurarViewBottom();
-//    adapter = new TrajetosAdapter(this, trajetos);
-//    listaParadas.setAdapter(adapter);
-//    bottomSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
-//
-
+  public void exibirRota(Trajeto trajeto) {
+    configurarViewBottom(trajeto);
+    if (trajeto.getCoordenadas() != null)
+      presenter.desenharRota(trajeto.getCoordenadas(), trajeto.getOnibus());
+    bottomSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
   }
 
   @Override
@@ -158,14 +190,38 @@ public class PrincipalActivity extends BaseActivity
     startActivityForResult(intent, INFO_PARADA_REQUEST);
   }
 
+  public void iniciarRotas() {
+    startActivityForResult(new Intent(PrincipalActivity.this, RotasActivity.class), INFO_ROTAS_REQUEST);
+  }
   @Override
   public void sair() {
-    finish();
+    new AlertDialog.Builder(this)
+        .setMessage("Deseja realmente sair?")
+        .setCancelable(false)
+        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialogInterface, int i) {
+            PrincipalActivity.this.finish();
+          }
+        })
+        .setNegativeButton("Não", null)
+        .show();
   }
 
   @Override
-  public void favoritos() {
+  public void finish() {
+    presenter.finish();
+    super.finish();
+  }
 
+  @Override
+  public void sobre() {
+
+  }
+
+  public void setFragmento(Contrato.MapaView fragmento) {
+    if (fragmento != null)
+      presenter.setFragmento(fragmento);
   }
 
   @Override
@@ -176,15 +232,16 @@ public class PrincipalActivity extends BaseActivity
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (requestCode == INFO_PARADA_REQUEST) {
+    if (requestCode == INFO_PARADA_REQUEST || requestCode == INFO_ROTAS_REQUEST) {
       if (resultCode == Activity.RESULT_OK) {
         Trajeto trajeto = (Trajeto) data.getSerializableExtra("trajeto");
-        Log.d("PRINCIPAL", "trajeto ok: " +trajeto.getRota().getDescricao());
-      }
-
-      if (resultCode == Activity.RESULT_CANCELED) {
-        Log.d("PRINCIPAL", "trajeto cancelado");
+        exibirRota(trajeto);
       }
     }
+  }
+
+  public void mostrarDadosUsuario(String nome, String email) {
+    tvUserNome.setText(nome);
+    tvUserEmail.setText(email);
   }
 }

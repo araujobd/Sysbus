@@ -1,10 +1,8 @@
-package com.dantas.bruno.sysbus.data;
+package com.dantas.bruno.sysbus.repositorio;
 
 import com.dantas.bruno.sysbus.Listener;
 import com.dantas.bruno.sysbus.model.Parada;
-import com.dantas.bruno.sysbus.model.Trajeto;
-
-import java.util.List;
+import com.dantas.bruno.sysbus.model.User;
 
 
 /**
@@ -13,12 +11,9 @@ import java.util.List;
 
 public interface Repositorio {
 
-
+  void salvarUsuario(String uid, User user);
   void buscarParadas(Listener.Paradas listener);
-  void setPonto(Parada parada);
-
   void buscarTrajetosNoPonto(Parada parada, Listener.Trajetos listener);
-  void buscarOnibus();
-  void buscarRotas();
-
+  void buscarOnibus(Listener.Localizacao listener);
+  void buscarTrajetos(Listener.Trajetos listener);
 }

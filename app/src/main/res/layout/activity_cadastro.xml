@@ -10,42 +10,20 @@
   android:background="@color/colorPrimaryDark"
   tools:context="com.dantas.bruno.sysbus.cadastro.CadastroActivity">
 <ImageView
-      android:id="@+id/imageView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="8dp"
-      android:layout_marginLeft="8dp"
-      android:layout_marginRight="8dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="34dp"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@mipmap/ic_launcher"/>
+  android:id="@+id/imageView"
+  android:layout_width="158dp"
+  android:layout_height="106dp"
+  android:layout_marginEnd="8dp"
+  android:layout_marginLeft="8dp"
+  android:layout_marginRight="8dp"
+  android:layout_marginStart="8dp"
+  android:layout_marginTop="50dp"
+  app:layout_constraintLeft_toLeftOf="parent"
+  app:layout_constraintRight_toRightOf="parent"
+  app:layout_constraintTop_toTopOf="parent"
+  app:srcCompat="@drawable/sys"
+  tools:layout_editor_absoluteY="60dp"/>
 
-
-  <android.support.design.widget.TextInputLayout
-    android:id="@+id/textInputLayout"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="72dp"
-    android:textColorHint="@android:color/white"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-    <EditText
-      android:id="@+id/user_nome"
-      android:inputType="textPersonName"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:backgroundTint="@android:color/white"
-      android:hint="@string/user_nome"/>
-  </android.support.design.widget.TextInputLayout>
 
   <android.support.design.widget.TextInputLayout
     android:id="@+id/textInputLayout2"
@@ -66,6 +44,7 @@
       android:inputType="textEmailAddress"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:textColor="@android:color/white"
       android:backgroundTint="@android:color/white"
       android:hint="@string/user_email"/>
   </android.support.design.widget.TextInputLayout>
@@ -87,6 +66,7 @@
       android:inputType="textPassword"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:textColor="@android:color/white"
       android:backgroundTint="@android:color/white"
       android:hint="@string/user_senha"/>
   </android.support.design.widget.TextInputLayout>
@@ -112,7 +92,7 @@
   <ProgressBar
     android:id="@+id/progress"
     style="?android:attr/progressBarStyle"
-    android:visibility="gone"
+    android:visibility="invisible"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
@@ -130,12 +110,37 @@
     android:layout_height="wrap_content"
     android:visibility="gone"
     android:text="@string/msg_erro_cadastro"
-    android:textColor="@android:color/holo_red_light"
+    android:textStyle="bold"
+    android:textColor="@android:color/holo_red_dark"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     android:layout_marginTop="8dp"
     app:layout_constraintTop_toBottomOf="@+id/imageView"
     android:layout_marginBottom="8dp"
     app:layout_constraintBottom_toTopOf="@+id/textInputLayout"/>
+
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/textInputLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="51dp"
+    android:textColorHint="@android:color/white"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+    <EditText
+      android:id="@+id/user_nome"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@android:color/white"
+      android:hint="@string/user_nome"
+      android:inputType="textPersonName"
+      android:textColor="@android:color/white"/>
+  </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>

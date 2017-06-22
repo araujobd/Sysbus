@@ -20,8 +20,9 @@ public class SplashActivity extends BaseActivity implements SplashContrato.View{
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splash);
 
-
-    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    getWindow()
+        .getDecorView()
+        .setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
     presenter = new SplashPresenter(this);
 
@@ -30,7 +31,7 @@ public class SplashActivity extends BaseActivity implements SplashContrato.View{
       public void run() {
         verificarLogin();
       }
-    }, 1500);
+    }, Long.parseLong(getString(R.string.tempo_splash)));
   }
 
   private void verificarLogin() {
@@ -38,7 +39,7 @@ public class SplashActivity extends BaseActivity implements SplashContrato.View{
   }
 
   @Override
-  public void iniciarLogin() {
+  public void logar() {
     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
     finish();
   }
@@ -49,4 +50,9 @@ public class SplashActivity extends BaseActivity implements SplashContrato.View{
     finish();
   }
 
+  @Override
+  public void finish() {
+    presenter.finish();
+    super.finish();
+  }
 }

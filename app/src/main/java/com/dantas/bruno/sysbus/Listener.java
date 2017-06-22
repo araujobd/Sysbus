@@ -1,9 +1,9 @@
 package com.dantas.bruno.sysbus;
 
-import android.view.View;
-
 import com.dantas.bruno.sysbus.model.Parada;
 import com.dantas.bruno.sysbus.model.Trajeto;
+import com.dantas.bruno.sysbus.splash.SplashContrato;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
@@ -19,6 +19,10 @@ public interface Listener {
 
   interface Trajetos {
     void onReady(List<Trajeto> trajetos);
+  }
+
+  interface Localizacao {
+    void onchange(LatLng localizacao);
   }
 
 }

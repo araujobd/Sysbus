@@ -1,19 +1,21 @@
 package com.dantas.bruno.sysbus.model;
 
+import java.io.Serializable;
+
 /**
  * Created by bruno on 16/06/17.
  */
 
-public class Onibus {
+public class Onibus implements Serializable{
 
   private String uid;
-  private int identificacao;
+  private String identificacao;
   private String status;
 
   public Onibus() {
   }
 
-  public Onibus(String uid, int identificacao, String status) {
+  public Onibus(String uid, String identificacao, String status) {
     this.uid = uid;
     this.identificacao = identificacao;
     this.status = status;
@@ -27,11 +29,11 @@ public class Onibus {
     this.uid = uid;
   }
 
-  public int getIdentificacao() {
+  public String getIdentificacao() {
     return identificacao;
   }
 
-  public void setIdentificacao(int identificacao) {
+  public void setIdentificacao(String identificacao) {
     this.identificacao = identificacao;
   }
 

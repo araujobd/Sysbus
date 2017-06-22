@@ -1,7 +1,6 @@
 package com.dantas.bruno.sysbus.login;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,8 +13,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginPresenter implements LoginContrato.Presenter {
 
-  private final LoginContrato.View view;
-  private final FirebaseAuth auth;
+  private LoginContrato.View view;
+  private FirebaseAuth auth;
 
   public LoginPresenter(LoginContrato.View view) {
     this.view = view;
@@ -24,7 +23,6 @@ public class LoginPresenter implements LoginContrato.Presenter {
 
   @Override
   public void loginComFirebase(String email, String senha) {
-    Log.d("FIREBASE", "LOGIN + " + auth.getCurrentUser());
     auth.signInWithEmailAndPassword(email, senha)
         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
           @Override
@@ -36,6 +34,10 @@ public class LoginPresenter implements LoginContrato.Presenter {
           }
         });
 
-    Log.d("FIREBASE", "LOGIN + " + auth.getCurrentUser());
+  }
+
+  public void finish() {
+    auth = null;
+    view = null;
   }
 }

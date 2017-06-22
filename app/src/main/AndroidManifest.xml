@@ -34,15 +34,14 @@
       android:name=".cadastro.CadastroActivity"
       android:theme="@style/AppTheme.NoActionBar">
     </activity>
-    <activity
-      android:name=".olds.MainsActiity"
-      android:label="@string/title_activity_main"
-      android:theme="@style/AppTheme.NoActionBar">
-    </activity>
+
     <activity
       android:name=".main.PrincipalActivity"
-      android:label="@string/title_activity_main"
+      android:label="@string/app_name"
       android:theme="@style/AppTheme.NoActionBar">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+      </intent-filter>
     </activity>
     <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -57,10 +56,11 @@
       android:value="@string/google_maps_key"/>
 
     <activity
-      android:name=".olds.MapsExemploActivity"
-      android:label="@string/title_activity_maps_exemplo">
+      android:name=".infoparada.InfoParadaActivity"
+      android:parentActivityName=".main.PrincipalActivity">
     </activity>
-    <activity android:name=".infoponto.InfoParadaActivity"
+    <activity
+      android:name=".rotas.RotasActivity"
       android:parentActivityName=".main.PrincipalActivity">
     </activity>
   </application>

@@ -1,11 +1,10 @@
 package com.dantas.bruno.sysbus.main;
 
-import android.support.v4.app.Fragment;
-
+import com.dantas.bruno.sysbus.model.Coordenada;
 import com.dantas.bruno.sysbus.model.Onibus;
 import com.dantas.bruno.sysbus.model.Parada;
-import com.dantas.bruno.sysbus.model.Rota;
 import com.dantas.bruno.sysbus.model.Trajeto;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
@@ -16,42 +15,33 @@ import java.util.List;
 public interface Contrato {
 
   interface PrincipalView {
-    void trocarFragmento(Fragment fragmento, final String TAG);
-
-    void exibirInfoPonto(List<Trajeto> trajetos);
     void sair();
-//    void sobre();
-    void favoritos();
-
+    void sobre();
     void login();
-
+    void exibirRota(Trajeto trajeto);
     void iniciarInfoParada(Parada parada);
+    void setFragmento(MapaView view);
+    void mostrarDadosUsuario(String nome, String email);
   }
 
   interface PrincipalPresenter {
     void verificarUsuario();
-  }
-
-  interface BottomView {
-
-  }
-
-  interface BottomPresenter {
-
+    void setFragmento(MapaView fragmento);
+    void desenharRota(List<Coordenada> coordenadas, Onibus onibus);
+    void finish();
+    void buscarUsuario();
   }
 
   interface MapaView {
-
     void exibirPontos(List<Parada> paradas);
-
-    void exibirOnibus(Onibus onibus);
-    void exibirRota(Rota rota);
+    void exibirOnibus(LatLng ponto);
+    void desenharRota(List<Coordenada> coordenadas, Onibus onibus);
   }
 
   interface MapaPresenter {
-
     void exibirInfoPonto(Parada parada);
-
     void onMapReady();
+    void buscarLocalizacaoOnibus();
   }
+
 }

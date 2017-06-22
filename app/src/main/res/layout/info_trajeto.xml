@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:background="#fdfdfd"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+
+  <TextView
+    android:id="@+id/rotas"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/rota"
+    android:textSize="15sp"
+    android:layout_marginStart="29dp"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="10dp"/>
+
+  <TextView
+    android:id="@+id/tv_descricao_rota"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="TextView"
+    android:textSize="25sp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginStart="27dp"
+    android:layout_below="@id/rotas"
+    android:layout_marginBottom="10dp"/>
+
+  <TextView
+    android:id="@+id/paradas"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="15sp"
+    android:text="@string/paradas"
+    android:layout_marginStart="29dp"
+    android:layout_below="@id/tv_descricao_rota"
+    android:layout_marginBottom="10dp"/>
+
+  <ListView
+    android:id="@+id/list_view_rota"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:listitem="@layout/item_lista_rota"
+    android:layout_below="@id/paradas"
+    android:layout_centerHorizontal="true"/>
+</RelativeLayout>

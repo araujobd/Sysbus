@@ -6,11 +6,17 @@
     <item
       android:id="@+id/rotas"
       android:icon="@drawable/ic_menu_send"
-      android:title="Rotas"/>
+      android:title="@string/rotas"/>
+
     <item
-      android:id="@+id/Favoritos"
+      android:id="@+id/sobre"
       android:icon="@drawable/ic_menu_send"
-      android:title="Favoritos"/>
+      android:title="@string/sobre"/>
+
+    <item
+      android:id="@+id/sair"
+      android:icon="@drawable/ic_exit"
+      android:title="@string/sair"/>
   </group>
 
 </menu>

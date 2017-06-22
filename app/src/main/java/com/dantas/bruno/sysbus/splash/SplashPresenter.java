@@ -1,7 +1,5 @@
 package com.dantas.bruno.sysbus.splash;
 
-import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -20,10 +18,15 @@ public class SplashPresenter implements SplashContrato.Presenter{
 
   @Override
   public void verificarLogin() {
-    Log.d("FIREBASE", "SPLASH + " + auth.getCurrentUser());
     if (auth.getCurrentUser() != null)
       view.iniciarPrincipal();
     else
-      view.iniciarLogin();
+      view.logar();
+  }
+
+  @Override
+  public void finish() {
+    auth = null;
+    view = null;
   }
 }

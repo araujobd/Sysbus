@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.dantas.bruno.sysbus.R;
+import com.dantas.bruno.sysbus.model.Parada;
 import com.dantas.bruno.sysbus.model.Trajeto;
 
 import java.util.List;
@@ -23,12 +24,14 @@ public class AdapterTrajeto extends ArrayAdapter<Trajeto> {
 
   private final Context contexto;
   private final List<Trajeto> trajetos;
+  private String paradaUID;
 
-  public AdapterTrajeto(Context contexto, List<Trajeto> trajetos) {
+  public AdapterTrajeto(Context contexto, List<Trajeto> trajetos, String paradaUID) {
     super(contexto, R.layout.item_lista_paradas, trajetos);
 
     this.contexto = contexto;
     this.trajetos = trajetos;
+    this.paradaUID = paradaUID;
   }
 
   @NonNull
@@ -38,15 +41,18 @@ public class AdapterTrajeto extends ArrayAdapter<Trajeto> {
 
     View linha = inflater.inflate(R.layout.item_lista_paradas, parent, false);
 
-    Log.d("PRINCIPAL", trajetos.get(0) + "ssss");
     TextView tvOnibus = (TextView) linha.findViewById(R.id.tv_onibus);
     TextView tvDescricao = (TextView) linha.findViewById(R.id.tv_descricao);
     TextView tvTempo = (TextView) linha.findViewById(R.id.tv_tempo);
 
-    tvOnibus.setText("023");
+    tvOnibus.setText(trajetos.get(position).getOnibus().getIdentificacao());
     tvDescricao.setText(trajetos.get(position).getRota().getNome());
-    tvTempo.setText("40 min");
+
+    for (Parada parada : trajetos.get(position).getParadas())
+      if (parada.getUid().contentEquals(paradaUID))
+        tvTempo.setText(parada.getTempoPadrao());
 
     return linha;
   }
+
 }

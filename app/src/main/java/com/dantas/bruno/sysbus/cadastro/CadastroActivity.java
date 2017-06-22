@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dantas.bruno.sysbus.BaseActivity;
-import com.dantas.bruno.sysbus.olds.MainsActiity;
+import com.dantas.bruno.sysbus.main.PrincipalActivity;
 import com.dantas.bruno.sysbus.R;
 import com.dantas.bruno.sysbus.login.LoginActivity;
 
@@ -22,7 +22,6 @@ public class CadastroActivity extends BaseActivity implements CadastroContrato.V
   private TextView tvMsgErro;
   private EditText edNome, edEmail, edSenha;
   private Button btCadastro;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -101,13 +100,18 @@ public class CadastroActivity extends BaseActivity implements CadastroContrato.V
   public void mostrarErroCadastro() {
     esconderProgresso();
     tvMsgErro.setVisibility(View.VISIBLE);
-//    mostrarMensagem(getString(R.string.msg_erro_cadastro));
   }
 
   @Override
   public void iniciarPrincipal() {
     esconderProgresso();
-    startActivity(new Intent(CadastroActivity.this, MainsActiity.class));
+    startActivity(new Intent(CadastroActivity.this, PrincipalActivity.class));
     finish();
+  }
+
+  @Override
+  public void finish() {
+    presenter.finish();
+    super.finish();
   }
 }

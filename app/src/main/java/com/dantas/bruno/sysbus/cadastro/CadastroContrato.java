@@ -13,5 +13,6 @@ public interface CadastroContrato {
 
   interface Presenter {
     void cadastrar(String nome, String email, String senha);
+    void finish();
   }
 }

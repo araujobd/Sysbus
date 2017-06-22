@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-  protected String TAG;
   private ViewGroup layout;
   private ProgressBar progressBar;
 
@@ -30,10 +29,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         .show();
   }
 
-  public void setProgressBar(ProgressBar progressBar) {
-    this.progressBar = progressBar;
-  }
-
   public void setProgressBar(int id) {
     this.progressBar = (ProgressBar) findViewById(id);
   }
@@ -45,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
   public void esconderProgresso() {
     if (progressBar != null)
-      progressBar.setVisibility(View.GONE);
+      progressBar.setVisibility(View.INVISIBLE);
   }
 
 }

@@ -1,10 +1,8 @@
-package com.dantas.bruno.sysbus.infoponto;
-
-import android.util.Log;
+package com.dantas.bruno.sysbus.infoparada;
 
 import com.dantas.bruno.sysbus.Listener;
-import com.dantas.bruno.sysbus.data.Repositorio;
-import com.dantas.bruno.sysbus.data.RepositorioImpl;
+import com.dantas.bruno.sysbus.repositorio.Repositorio;
+import com.dantas.bruno.sysbus.repositorio.RepositorioImpl;
 import com.dantas.bruno.sysbus.model.Parada;
 import com.dantas.bruno.sysbus.model.Trajeto;
 
@@ -14,12 +12,12 @@ import java.util.List;
  * Created by bruno on 19/06/17.
  */
 
-public class InfoParadaPresenter implements Contrato.Presenter {
+public class InfoParadaPresenter implements ParadaContrato.Presenter {
 
-  private Contrato.View view;
+  private ParadaContrato.View view;
   private Repositorio repositorio;
 
-  public InfoParadaPresenter(Contrato.View view) {
+  public InfoParadaPresenter(ParadaContrato.View view) {
     this.view = view;
     this.repositorio = RepositorioImpl.getInstance();
   }
@@ -37,5 +35,11 @@ public class InfoParadaPresenter implements Contrato.Presenter {
   @Override
   public void escolher(Trajeto trajeto) {
     view.retornarResultado(trajeto);
+  }
+
+  @Override
+  public void finish() {
+    repositorio = null;
+    view = null;
   }
 }

@@ -13,16 +13,18 @@ public class Trajeto implements Serializable {
   private List<Parada> paradas;
   private List<Coordenada> coordenadas;
   private Rota rota;
+  private Onibus onibus;
 
   public Trajeto() {
 
   }
 
-  public Trajeto(String uid, List<Parada> paradas, List<Coordenada> coordenadas, Rota rota) {
+  public Trajeto(String uid, List<Parada> paradas, List<Coordenada> coordenadas, Rota rota, Onibus onibus) {
     this.uid = uid;
     this.paradas = paradas;
     this.coordenadas = coordenadas;
     this.rota = rota;
+    this.onibus = onibus;
   }
 
   public String getUid() {
@@ -57,6 +59,13 @@ public class Trajeto implements Serializable {
     this.rota = rota;
   }
 
+  public Onibus getOnibus() {
+    return onibus;
+  }
+
+  public void setOnibus(Onibus onibus) {
+    this.onibus = onibus;
+  }
 
   @Override
   public String toString() {
