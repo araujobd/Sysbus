@@ -26,4 +26,11 @@
   <string name="tempo_splash">2500</string>
   <string name="paradas">Paradas</string>
   <string name="rota">Rota</string>
+
+  <string name="texto_sobre">
+    O aplicativo SysBus tem o objetivo de mostrar as paradas de Ônibus e rotas, como também horários.\n\n
+    © Copyright SysBus
+    \n\n
+    Bruno Dantas
+  </string>
 </resources>

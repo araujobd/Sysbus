@@ -164,6 +164,9 @@ public class PrincipalActivity extends BaseActivity
   public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     int id = item.getItemId();
     switch (id) {
+      case R.id.sobre:
+        sobre();
+        return true;
       case R.id.sair:
         sair();
         return true;
@@ -216,7 +219,12 @@ public class PrincipalActivity extends BaseActivity
 
   @Override
   public void sobre() {
-
+    new AlertDialog.Builder(this)
+        .setTitle("Sobre SysBus")
+        .setMessage(R.string.texto_sobre)
+        .setCancelable(false)
+        .setNeutralButton("OK", null)
+        .show();
   }
 
   public void setFragmento(Contrato.MapaView fragmento) {
